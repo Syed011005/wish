@@ -1,15 +1,19 @@
 function celebrateEid() {
-    // Code for celebrating Eid
+    // logic to create Eid celebration effect
+    particleSystem.addParticles(/* parameters for Eid celebration */);
 }
 
 function heartRain() {
-    // Code for heart rain effect
+    // logic to create heart rain effect
+    particleSystem.addParticles(/* parameters for heart rain */);
 }
 
 function magicEffect() {
-    // Code for magic effect
+    // logic to create magic effect
+    particleSystem.addParticles(/* parameters for magic effect */);
 }
 
 function auroraToggle() {
-    // Code to toggle aurora effect
+    // logic to toggle aurora effect
+    particleSystem.toggleEffect(/* parameters for toggling aurora */);
 }
