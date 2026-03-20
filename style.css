@@ -152,7 +152,7 @@ body {
 /* IMAGE EFFECT */
 .gallery-img {
   width: 100%;
-  height: 100%;
+  height: 50%;
   object-fit: cover;
   transition: 0.5s;
   border-radius: 15px;
