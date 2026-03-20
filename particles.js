@@ -1,3 +1,4 @@
+// particles.js
 const canvas = document.getElementById('particleCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -7,77 +8,54 @@ canvas.height = window.innerHeight;
 const particles = [];
 
 class Particle {
-    constructor(x, y, type) {
-        this.x = x;
-        this.y = y;
-        this.type = type;
-        this.vx = (Math.random() - 0.5) * 4;
-        this.vy = (Math.random() - 0.5) * 4;
-        this.life = 1;
-        this.decay = Math.random() * 0.02 + 0.01;
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+        this.opacity = Math.random() * 0.5 + 0.3;
     }
-    
+
     update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        this.vy += 0.1;
-        this.life -= this.decay;
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x > canvas.width) this.x = 0;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0;
+        if (this.y < 0) this.y = canvas.height;
     }
-    
+
     draw() {
-        ctx.globalAlpha = this.life;
-        ctx.fillStyle = this.type === 'heart' ? '#ff1493' : '#ffd700';
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
     }
 }
 
-function addParticles(type, count = 30) {
-    for (let i = 0; i < count; i++) {
-        particles.push(new Particle(
-            canvas.width / 2,
-            canvas.height / 2,
-            type
-        ));
+function init() {
+    for (let i = 0; i < 100; i++) {
+        particles.push(new Particle());
     }
-}
-
-function celebrateEid() {
-    addParticles('star', 50);
-}
-
-function heartRain() {
-    addParticles('heart', 50);
-}
-
-function magicEffect() {
-    addParticles('magic', 100);
-}
-
-function auroraToggle() {
-    document.querySelector('.aurora').style.opacity = 
-        document.querySelector('.aurora').style.opacity === '0' ? '1' : '0';
 }
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    for (let i = particles.length - 1; i >= 0; i--) {
-        particles[i].update();
-        if (particles[i].life <= 0) {
-            particles.splice(i, 1);
-        } else {
-            particles[i].draw();
-        }
+    for (let particle of particles) {
+        particle.update();
+        particle.draw();
     }
     
     requestAnimationFrame(animate);
 }
 
-animate();
-
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 });
+
+init();
+animate();
