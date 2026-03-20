@@ -20,7 +20,7 @@ class Particle {
     update() {
         this.x += this.vx;
         this.y += this.vy;
-        this.vy += 0.1; // gravity
+        this.vy += 0.1;
         this.life -= this.decay;
     }
     
@@ -56,7 +56,6 @@ function magicEffect() {
 }
 
 function auroraToggle() {
-    // Toggle aurora effect
     document.querySelector('.aurora').style.opacity = 
         document.querySelector('.aurora').style.opacity === '0' ? '1' : '0';
 }
