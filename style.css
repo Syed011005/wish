@@ -144,10 +144,10 @@ body {
 
 /* 🔥 MAIN FIX (FACE VISIBLE) */
 .gallery-img {
-  width: 50%;
+  width:80%;
   height: 100%;
   object-fit: contain;   /* IMPORTANT */
-  border-radius: 15px;
+  border-radius: 10px;
   transition: 0.4s;
 }
 
